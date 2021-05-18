@@ -4,8 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -29,6 +34,10 @@ public class createVote extends AppCompatActivity {
     voteAdapter adapter;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
+    public String customer;
+    TextView candName;
+
+
 
     ArrayList<getsetVote> arrayList = new ArrayList<>();
 
@@ -42,10 +51,20 @@ public class createVote extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
-        getShedule();
+        candName = (TextView) findViewById(R.id.candName);
+
+        getNames();
+
     }
 
-    public void getShedule(){
+    public void getValue(){
+
+        Log.e("New Value", "getValue: "+customer );
+        candName.setText(customer);
+
+    }
+
+    public void getNames(){
 
         arrayList.clear();
 
@@ -69,6 +88,7 @@ public class createVote extends AppCompatActivity {
 
 
 
+
                                 getsetVote task = new getsetVote(id,name);
                                 arrayList.add(task);
 
@@ -77,6 +97,10 @@ public class createVote extends AppCompatActivity {
                             adapter = new voteAdapter(arrayList, createVote.this);
                            recyclerView.setAdapter(adapter);
                             adapter.notifyDataSetChanged();
+
+
+
+
 
 
                         } catch (JSONException e) {
@@ -99,4 +123,6 @@ public class createVote extends AppCompatActivity {
         requestQueue.add(stringRequest);
 
     }
+
+
 }
