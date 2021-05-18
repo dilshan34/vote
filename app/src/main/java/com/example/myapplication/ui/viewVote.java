@@ -3,6 +3,7 @@ package com.example.myapplication.ui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -31,12 +32,15 @@ public class viewVote extends AppCompatActivity {
     private PieChart pieChart_view;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_vote);
 
+
         pieChart_view=findViewById(R.id.pieChart_view);
+
 
         setPieChart();
         getChart();

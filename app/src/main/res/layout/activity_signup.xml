@@ -67,6 +67,7 @@
 
             <EditText
 
+                android:id="@+id/userName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
@@ -78,7 +79,6 @@
                 android:elevation="8dp"
                 android:fontFamily="serif"
                 android:hint="Name"
-                android:inputType="textPassword"
                 android:paddingLeft="20dp"
                 android:paddingTop="7dp"
                 android:paddingRight="10dp"
@@ -86,7 +86,7 @@
                 android:textColorHint="@color/border"
                 android:textSize="15sp" />
             <EditText
-                android:id="@+id/txtlogpassword"
+                android:id="@+id/nic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
@@ -98,7 +98,7 @@
                 android:elevation="8dp"
                 android:fontFamily="serif"
                 android:hint="NIC"
-                android:inputType="textPassword"
+                android:inputType="number"
                 android:paddingLeft="20dp"
                 android:paddingTop="7dp"
                 android:paddingRight="10dp"
@@ -133,7 +133,7 @@
 
 
                 <ImageButton
-                    android:id="@+id/btnlogin"
+                    android:id="@+id/btnsignup"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:src="@drawable/arrow"

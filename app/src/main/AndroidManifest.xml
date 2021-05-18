@@ -12,9 +12,9 @@
         android:theme="@style/Theme.MyApplication">
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".ui.signup" />
-        <activity android:name=".ui.login" />
         <activity android:name=".ui.viewVote" />
-        <activity android:name=".ui.createVote">
+        <activity android:name=".ui.createVote" />
+        <activity android:name=".ui.login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

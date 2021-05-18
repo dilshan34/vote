@@ -16,6 +16,7 @@
         android:orientation="vertical">
 
         <TextView
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -66,7 +67,7 @@
 
 
             <EditText
-                android:id="@+id/txtlogpassword"
+                android:id="@+id/txtpassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
@@ -78,7 +79,7 @@
                 android:elevation="8dp"
                 android:fontFamily="serif"
                 android:hint="NIC"
-                android:inputType="textPassword"
+                android:inputType="number"
                 android:paddingLeft="20dp"
                 android:paddingTop="7dp"
                 android:paddingRight="10dp"
@@ -151,8 +152,8 @@
             android:id="@+id/txtcreateAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="serif"
             android:background="@drawable/ripple_effect"
+            android:fontFamily="serif"
             android:text=" Create"
             android:textColor="#141414"
             android:textSize="12sp" />

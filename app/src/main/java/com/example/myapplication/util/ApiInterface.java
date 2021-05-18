@@ -9,6 +9,6 @@ import retrofit2.http.GET;
 
 public interface ApiInterface {
 
-    @GET("getSubTask.php")
+    @GET("getVoteResult.php")
     Call<List<getsetChart>> getChartDetails();
 }

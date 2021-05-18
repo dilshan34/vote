@@ -5,12 +5,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -28,14 +31,19 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class createVote extends AppCompatActivity {
 
     voteAdapter adapter;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
-    public String customer;
+    public String customer,customerId;
     TextView candName;
+    Button submitButton;
+    String sessionId;
+    ImageView viewResult;
 
 
 
@@ -52,8 +60,28 @@ public class createVote extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
 
         candName = (TextView) findViewById(R.id.candName);
+        submitButton = (Button) findViewById(R.id.submitbtn);
+        viewResult = (ImageView) findViewById(R.id.viewResult);
 
         getNames();
+
+         sessionId = getIntent().getStringExtra("nic");
+
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                uploadTask();
+            }
+        });
+
+        viewResult.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(createVote.this,viewVote.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -61,6 +89,80 @@ public class createVote extends AppCompatActivity {
 
         Log.e("New Value", "getValue: "+customer );
         candName.setText(customer);
+
+    }
+
+    public void uploadTask()
+    {
+        Log.e("New Value uploadtask", "getValue: "+customer );
+        Log.e("New Value uploadtask", "getValue: "+customerId );
+        Log.e("New Value", "session: "+sessionId );
+
+
+
+       // h1time = fromTime.getText().toString();
+
+
+
+
+        StringRequest stringRequest =new StringRequest(Request.Method.POST,
+                constant.uploadTask_url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+                            Log.e("response", "onResponse: "+response );
+                            JSONArray jsonArray = new JSONArray(response);
+                            JSONObject jsonObject=jsonArray.getJSONObject(0);
+                            String code=jsonObject.getString("code");
+
+                            Log.e("Response", "onResponse: "+code );
+
+                            if(code.equals("false"))
+                            {
+                                Log.e("response", "if " );
+                                Toast.makeText(createVote.this,"Login Error",Toast.LENGTH_SHORT).show();
+
+
+                            }
+                            else {
+                                Log.e("response", "else " );
+
+
+                                Intent intent=new Intent(createVote.this, viewVote.class);
+                                startActivity(intent);
+
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams()  {
+                Map<String,String> params = new HashMap<String,String>();
+                params.put("nic",sessionId);
+
+
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
+
 
     }
 
@@ -82,7 +184,7 @@ public class createVote extends AppCompatActivity {
                             {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 String id = jsonObject.getString("id");
-                                String name = jsonObject.getString("task");
+                                String name = jsonObject.getString("name");
 
                                 Log.e("TAG", "task : "+name );
 

@@ -12,20 +12,57 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@drawable/top"
-        android:orientation="vertical">
+        android:layout_weight="0.7"
+        android:orientation="horizontal">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="4"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:fontFamily="@font/montserrat_subrayada_bold"
             android:gravity="center"
             android:text="Vote"
-            android:textColor="@color/white"
+            android:textColor="@color/border"
             android:textSize="45sp" />
 
+        <ImageView
+            android:id="@+id/viewResult"
+            android:padding="5dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/vote1"
+            android:background="@drawable/ripple_effect"
+            android:clickable="true"
+            android:layout_weight="1"/>
+
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="end"
+            android:text="Candidate : "/>
+
+        <TextView
+            android:id="@+id/candName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:textSize="15sp"
+            android:textColor="@color/black"/>
 
     </LinearLayout>
 
@@ -51,14 +88,14 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_weight="0.5">
-        <TextView
-            android:id="@+id/candName"
-            android:layout_width="wrap_content"
+
+        <Button
+            android:id="@+id/submitbtn"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            
-            android:textSize="20sp"
-            android:fontFamily="@font/bold"
-            />
+            android:text="submit"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/button"/>
     </LinearLayout>
 
 

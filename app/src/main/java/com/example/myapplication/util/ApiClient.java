@@ -14,7 +14,7 @@ public class ApiClient {
     public static Retrofit getApiClient() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl("https://aws.erav.lk/EravSchedule/API/")
+                    .baseUrl("http://192.168.8.143/vote/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
