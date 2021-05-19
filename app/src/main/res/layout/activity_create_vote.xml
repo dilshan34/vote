@@ -7,12 +7,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     tools:context=".ui.createVote">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.7"
+        android:background="@color/white"
         android:orientation="horizontal">
 
         <TextView
@@ -51,6 +53,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@color/border"
             android:layout_gravity="center"
             android:gravity="end"
             android:text="Candidate : "/>
@@ -70,12 +73,14 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
+        android:background="@color/white"
         android:layout_marginTop="40dp"
         android:layout_weight="3.5">
 
        <androidx.recyclerview.widget.RecyclerView
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
+           android:background="@color/white"
            android:id="@+id/recyclerview">
 
        </androidx.recyclerview.widget.RecyclerView>

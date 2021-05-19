@@ -2,7 +2,15 @@ package com.example.myapplication.models;
 
 public class getsetVote {
 
-  String id,name;
+  String id,name,image;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public String getId() {
         return id;
@@ -20,8 +28,11 @@ public class getsetVote {
         this.name = name;
     }
 
-    public getsetVote(String id, String name) {
+    public getsetVote(String id, String name,String image) {
         this.id = id;
         this.name = name;
+        this.image = image;
     }
+
+
 }

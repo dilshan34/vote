@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.myapplication.R;
 import com.example.myapplication.models.getsetVote;
 import com.example.myapplication.ui.createVote;
@@ -45,6 +48,11 @@ public class voteAdapter extends RecyclerView.Adapter<voteAdapter.MyViewHolder> 
         holder.name.setText(arrayList.get(position).getName());
         holder.txtid.setText(arrayList.get(position).getId());
 
+        Glide.with(this.context)
+                .load(arrayList.get(position).getImage())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(holder.image);
+
         holder.txtName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,6 +76,7 @@ public class voteAdapter extends RecyclerView.Adapter<voteAdapter.MyViewHolder> 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView txtid, name;
         ImageButton txtName;
+        ImageView image;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -75,6 +84,7 @@ public class voteAdapter extends RecyclerView.Adapter<voteAdapter.MyViewHolder> 
            txtid = itemView.findViewById(R.id.txtid);
             name = (TextView) itemView.findViewById(R.id.txtname);
             txtName =(ImageButton) itemView.findViewById(R.id.txtName);
+            image = (ImageView) itemView.findViewById(R.id.logo);
 
 
         }

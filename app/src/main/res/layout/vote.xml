@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="wrap_content">
 
     <LinearLayout
+
 
         android:layout_width="match_parent"
         android:layout_height="80dp"
@@ -13,13 +15,17 @@
 
         <LinearLayout
 
+
             android:layout_width="0dp"
             android:layout_weight="3"
+            android:layout_marginLeft="5dp"
             android:layout_gravity="center"
+            android:background="@color/white"
             android:orientation="horizontal"
             android:layout_height="wrap_content">
 
             <ImageView
+                android:id="@+id/logo"
                 android:paddingHorizontal="10dp"
                 android:layout_width="70dp"
                 android:layout_marginLeft="20dp"
@@ -31,6 +37,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
                 android:fontFamily="@font/bold"
+                android:textColor="@color/border"
                 android:layout_gravity="center"
                 android:textSize="17sp"
                 android:paddingBottom="10dp"
@@ -57,9 +64,9 @@
                 android:layout_margin="5dp"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/vote5"
+                android:src="@drawable/vote"
                 android:layout_gravity="center"
-                android:background="@drawable/ripple_effect"
+                android:background="@drawable/ripple_vote"
                 android:textSize="16sp" />
         </LinearLayout>
 

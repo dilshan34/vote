@@ -43,7 +43,7 @@ public class createVote extends AppCompatActivity {
     TextView candName;
     Button submitButton;
     String sessionId;
-    ImageView viewResult;
+    ImageView viewResult,logo;
 
 
 
@@ -62,6 +62,7 @@ public class createVote extends AppCompatActivity {
         candName = (TextView) findViewById(R.id.candName);
         submitButton = (Button) findViewById(R.id.submitbtn);
         viewResult = (ImageView) findViewById(R.id.viewResult);
+        logo = (ImageView) findViewById(R.id.logo);
 
         getNames();
 
@@ -233,13 +234,14 @@ public class createVote extends AppCompatActivity {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 String id = jsonObject.getString("id");
                                 String name = jsonObject.getString("name");
+                                String image = jsonObject.getString("image");
 
-                                Log.e("TAG", "task : "+name );
+                                Log.e("TAG", "task : "+image );
 
 
 
 
-                                getsetVote task = new getsetVote(id,name);
+                                getsetVote task = new getsetVote(id,name,image);
                                 arrayList.add(task);
 
 
