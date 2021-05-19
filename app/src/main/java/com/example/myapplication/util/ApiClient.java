@@ -1,5 +1,7 @@
 package com.example.myapplication.util;
 
+import com.example.myapplication.constant;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -14,7 +16,7 @@ public class ApiClient {
     public static Retrofit getApiClient() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.8.143/vote/")
+                    .baseUrl(constant.base)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }

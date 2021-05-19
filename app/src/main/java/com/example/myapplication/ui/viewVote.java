@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Color;
 import android.media.Image;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.myapplication.R;
 import com.example.myapplication.models.getsetChart;
@@ -22,6 +24,8 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,6 +34,7 @@ import retrofit2.Response;
 public class viewVote extends AppCompatActivity {
 
     private PieChart pieChart_view;
+    Timer timer;
 
 
 
@@ -42,10 +47,33 @@ public class viewVote extends AppCompatActivity {
         pieChart_view=findViewById(R.id.pieChart_view);
 
 
-        setPieChart();
-        getChart();
+
+
+
+        content();
     }
 
+
+    public void content(){
+        setPieChart();
+        getChart();
+
+        Log.e("TAG", "refresh: " );
+
+        refresh(5000);
+    }
+
+    public void refresh(int time){
+        final Handler handler = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                content();
+            }
+        };
+
+        handler.postDelayed(runnable,time);
+    }
     private  void getChart(){
 
 
@@ -65,7 +93,7 @@ public class viewVote extends AppCompatActivity {
                         pieEntries.add(new PieEntry(piechart.getTaskId(),piechart.getTask()) );
 
                         pieChart_view.setVisibility(View.VISIBLE);
-                        pieChart_view.animateXY(2000,2000);
+                      //  pieChart_view.animateXY(2000,2000);
 
                         ArrayList<Integer> colors = new ArrayList<>();
                         for (int color : ColorTemplate.MATERIAL_COLORS){

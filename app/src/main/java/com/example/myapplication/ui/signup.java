@@ -30,7 +30,7 @@ import java.util.Map;
 public class signup extends AppCompatActivity {
 
     EditText username,nic;
-    public String uName,uNic;
+    public String uName,uNic,sessionId;
     ImageButton btnsignup;
 
     @Override
@@ -41,6 +41,7 @@ public class signup extends AppCompatActivity {
         username = findViewById(R.id.userName);
         nic = findViewById(R.id.nic);
         btnsignup =(ImageButton) findViewById(R.id.btnsignup);
+
 
 
                 btnsignup.setOnClickListener(new View.OnClickListener() {
@@ -56,10 +57,9 @@ public class signup extends AppCompatActivity {
 
                         }
                         else{
-                            uploadata();
+                            checkCustomer();
 
-                            Intent intent = new Intent(signup.this,login.class);
-                            startActivity(intent);
+
                         }
 
 
@@ -116,4 +116,79 @@ public class signup extends AppCompatActivity {
 
 
     }
+
+
+    public void checkCustomer(){
+
+        uNic = nic.getText().toString();
+        Log.e("Response", "nic: "+uNic );
+
+        StringRequest stringRequest =new StringRequest(Request.Method.POST,
+                constant.checkNICr_url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+                            Log.e("response", "onResponse: "+response );
+                            JSONArray jsonArray = new JSONArray(response);
+                            JSONObject jsonObject=jsonArray.getJSONObject(0);
+                            String code=jsonObject.getString("code");
+
+
+
+
+
+
+
+                            if(code.equals("false"))
+                            {
+                                Log.e("response", "if " );
+                                Toast.makeText(signup.this,"Registered",Toast.LENGTH_SHORT).show();
+
+
+                                uploadata();
+
+                                Intent intent = new Intent(signup.this,login.class);
+                                startActivity(intent);
+
+                            }
+                            else {
+                                Log.e("response", "else " );
+                                Toast.makeText(signup.this,"Already Registered",Toast.LENGTH_SHORT).show();
+
+
+
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams()  {
+                Map<String,String> params = new HashMap<String,String>();
+
+                params.put("password",uNic);
+
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
+
+
+    }
+
 }

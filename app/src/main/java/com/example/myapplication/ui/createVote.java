@@ -39,7 +39,7 @@ public class createVote extends AppCompatActivity {
     voteAdapter adapter;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
-    public String customer,customerId;
+    public String candidate,candidateId;
     TextView candName;
     Button submitButton;
     String sessionId;
@@ -71,7 +71,8 @@ public class createVote extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadTask();
+
+                checkCustomer();
             }
         });
 
@@ -87,15 +88,81 @@ public class createVote extends AppCompatActivity {
 
     public void getValue(){
 
-        Log.e("New Value", "getValue: "+customer );
-        candName.setText(customer);
+        Log.e("New Value", "getValue: "+candidate );
+        candName.setText(candidate);
 
     }
 
+    public void checkCustomer(){
+
+
+        StringRequest stringRequest =new StringRequest(Request.Method.POST,
+                constant.checkUser_url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+                            Log.e("response", "onResponse: "+response );
+                            JSONArray jsonArray = new JSONArray(response);
+                            JSONObject jsonObject=jsonArray.getJSONObject(0);
+                            String code=jsonObject.getString("code");
+
+
+
+
+
+                            Log.e("Response", "onResponse: "+code );
+
+                            if(code.equals("false"))
+                            {
+                                Log.e("response", "if " );
+                                Toast.makeText(createVote.this,"voted",Toast.LENGTH_SHORT).show();
+
+                                uploadTask();
+
+                            }
+                            else {
+                                Log.e("response", "else " );
+                                Toast.makeText(createVote.this,"Already voted",Toast.LENGTH_SHORT).show();
+
+
+
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams()  {
+                Map<String,String> params = new HashMap<String,String>();
+
+                params.put("password",sessionId);
+
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
+
+
+    }
     public void uploadTask()
     {
-        Log.e("New Value uploadtask", "getValue: "+customer );
-        Log.e("New Value uploadtask", "getValue: "+customerId );
+        Log.e("New Value uploadtask", "getValue: "+candidate );
+        Log.e("candidate id", "getValue: "+candidateId );
         Log.e("New Value", "session: "+sessionId );
 
 
@@ -114,27 +181,7 @@ public class createVote extends AppCompatActivity {
                         try {
                             Log.e("response", "onResponse: "+response );
                             JSONArray jsonArray = new JSONArray(response);
-                            JSONObject jsonObject=jsonArray.getJSONObject(0);
-                            String code=jsonObject.getString("code");
 
-                            Log.e("Response", "onResponse: "+code );
-
-                            if(code.equals("false"))
-                            {
-                                Log.e("response", "if " );
-                                Toast.makeText(createVote.this,"Login Error",Toast.LENGTH_SHORT).show();
-
-
-                            }
-                            else {
-                                Log.e("response", "else " );
-
-
-                                Intent intent=new Intent(createVote.this, viewVote.class);
-                                startActivity(intent);
-
-
-                            }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -153,6 +200,7 @@ public class createVote extends AppCompatActivity {
             protected Map<String, String> getParams()  {
                 Map<String,String> params = new HashMap<String,String>();
                 params.put("nic",sessionId);
+                params.put("can_id",candidateId);
 
 
                 return params;

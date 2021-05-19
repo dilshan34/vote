@@ -51,8 +51,8 @@ public class voteAdapter extends RecyclerView.Adapter<voteAdapter.MyViewHolder> 
 
                 Toast.makeText(v.getContext(), arrayList.get(position).getName().toString() , Toast.LENGTH_SHORT).show();
 
-                ((createVote)context).customer=arrayList.get(position).getName().toString();
-                ((createVote)context).customerId=arrayList.get(position).getId().toString();
+                ((createVote)context).candidate=arrayList.get(position).getName().toString();
+                ((createVote)context).candidateId=arrayList.get(position).getId().toString();
                 ((createVote)context).getValue();
             }
         });
